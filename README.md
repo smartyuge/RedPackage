@@ -1,5 +1,5 @@
 # RedPackage
-红包精灵
+红包精灵，如果喜欢，点个star,开源不易。
 
 ##效果图：
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge5.png)
@@ -126,5 +126,9 @@ android:canRetrieveWindowContent="true"
 ``` 
 ##欢迎关注我的个人公众号，android干货，源码解析
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/qrcode.jpg)
+
+版权及免责声明
+
+本项目使用 GNU Lesser General Public License协议，误用于商业性质。
 
 
