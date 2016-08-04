@@ -1,6 +1,16 @@
 # RedPackage
 红包精灵
 
+效果图：
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge5.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge6.png)
+
+关键Service代码：
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge1.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge2.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge3.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge4.png)
+
 实现原理
 
 1.1 状态说明
