@@ -125,6 +125,6 @@ android:canRetrieveWindowContent="true"
     }
 ``` 
 ##欢迎关注我的个人公众号，android干货，源码解析
-![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image1.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/qrcode.jpg)
 
 
