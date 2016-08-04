@@ -1,28 +1,31 @@
 # RedPackage
 红包精灵
 
-效果图：
+##效果图：
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge5.png)
-![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge6.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image6.png)
 
-关键Service代码：
-![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge1.png)
-![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge2.png)
-![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge3.png)
-![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge4.png)
+##关键Service代码：
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image1.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image2.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image3.png)
+![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image4.png)
 
-实现原理
+##实现原理
 
 1.1 状态说明
+``` 
 	private static final String WECHAT_OPEN_CH = "拆红包";
 	private static final String WECHAT_VIEW_SELF_CH = "查看红包";
 	private static final String WECHAT_VIEW_OTHERS_CH = "领取红包";
 	private static final String WECHAT_NOTIFICATION_TIP = "[微信红包]";
+``` 
 
 1.2 根据阶段选择不同的入口
 
 在每次窗体状态发生变化后，根据当前所在的阶段选择入口。
-/* 如果戳开但还未领取 */
+``` 
+        /* 如果戳开但还未领取 */
         if (mNeedUnpack && (mUnpackNodeList != null)) {
         	Log.d(TAG, "事件----> start performAction 戳开但还未领取");
             int size = mUnpackNodeList.size();
@@ -33,10 +36,11 @@
             }
             Log.d(TAG, "事件----> end performAction 戳开但还未领取");
         }
+``` 
 
 2. 屏幕内容检测和自动化点击的实现
-
-/** 打开通知栏消息*/
+``` 
+    /** 打开通知栏消息*/
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void openNotify(AccessibilityEvent event) {
         if(event.getParcelableData() == null || !(event.getParcelableData() instanceof Notification)) {
@@ -52,6 +56,8 @@
             e.printStackTrace();
         }
     }
+``` 
+
 和其他插件一样，这里使用的是Android API提供的AccessibilityService。这个类位于android.accessibilityservice包内，开启服务后就会自动做一些操作
 像现在360的自动安装apk,也是开启了此服务。
 
@@ -80,8 +86,8 @@ android:canRetrieveWindowContent="true"
 2.2 获取红包所在的节点
 
 首先，我们要获取当前屏幕的根节点，下面两种方式效果是相同的：
-
- /* 聊天会话窗口，遍历节点匹配“领取红包”和"查看红包" */
+``` 
+      /* 聊天会话窗口，遍历节点匹配“领取红包”和"查看红包" */
         List<AccessibilityNodeInfo> nodes1 = this.findAccessibilityNodeInfosByTexts(
         		this.rootNodeInfo, 
         		new String[]{
@@ -95,8 +101,9 @@ android:canRetrieveWindowContent="true"
             }
             return;
         }
-
+``` 
 2.3 红包标识符
+``` 
     /**
      * 将节点对象的id和红包上的内容合并
      * 用于表示一个唯一的红包
@@ -116,5 +123,5 @@ android:canRetrieveWindowContent="true"
         Log.d(TAG, "事件----> start getHongbaoText() " + content);
         return content;
     }
-
+``` 
 
