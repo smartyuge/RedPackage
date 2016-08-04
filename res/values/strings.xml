@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">红包精灵</string>
+    <string name="accessibility_description">请启动红包精灵服务</string>
+    <string name="title_activity_guide">GuideActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_about_us">AboutUsActivity</string>
+     <string name="settings">"设置"</string>
+     <string name="upgrade_upgrade">"升级"</string>
+    <string name="upgrade_title">"检查更新"</string>
+    <string name="upgrade_ok">"更新"</string>
+    <string name="upgrade_cancel">"取消"</string>
+    <string name="upgrade_info">"有新版本，是否要更新？"</string>
+    <string name="upgrade_current_version">"当前版本：v%1$s"</string>
+    <string name="checkupdate_sd_error">"sd卡不可用，请检查"</string>
+    <string name="checkupdate_lastversion">"您使用的就是最新版，感觉棒棒哒"</string>
+    <string name="checkupdate_newversion_info">"快试试新版本v%1$s的功能吧"</string>
+    <string name="open_use_service">"打开辅助服务"</string>
+    <string name="open_study_course">"查看抢红包教程"</string>
+    <string name="open_see_history">"点击查看抢到红包记录"</string>
+    <string name="open_see_other">"点击查看其抢红包榜"</string>
+
+</resources>

@@ -1,0 +1,37 @@
+package com.marsXTU.qianghongbao;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.WindowManager;
+
+import com.ant.liao.GifView;
+import com.ant.liao.GifView.GifImageType;
+
+public class GuideActivity extends Activity {
+
+	private GifView gf1;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_guide);
+		
+		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		@SuppressWarnings("deprecation")
+		int width = wm.getDefaultDisplay().getWidth();
+		@SuppressWarnings("deprecation")
+		int height = wm.getDefaultDisplay().getHeight();
+		
+		gf1 = (GifView) findViewById(R.id.gif2);
+		// 设置Gif图片源
+		gf1.setGifImage(R.drawable.guide);
+		// 设置显示的大小，拉伸或者压缩
+		gf1.setShowDimension(width, height);
+		// 设置加载方式：先加载后显示、边加载边显示、只显示第一帧再显示
+		gf1.setGifImageType(GifImageType.COVER);
+		
+	}
+
+
+}

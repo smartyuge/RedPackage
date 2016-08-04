@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Aixincustom" default="help"
+	xmlns:antcontrib="antlib:net.sf.antcontrib">
+	<property name="APK_ISPINGBACKOFFICIAL" value="true"/>
+	<property name="APK_SHOW_VOLUME" value="true"/>
+	<property name="APK_SUPPORT_MICROWINDOW_PLAY" value="false"/>
+	<property name="APK_HIDE_SHORTCUT" value="false"/>
+	<property name="APK_PACKAGE_NAME" value=""/>
+	<property name="APK_SUPPORT_MULTISCREEN" value="true"/>
+	<property name="APK_MEDIAPLAYERTYPE" value="3"/>
+	<property name="APK_CUSTOMER" value="iqiyi" />
+	<property name="APK_UUID" value="" />
+	<property name="APK_MARKET" value="" />
+	
+	<condition property="cr-lf" value="&#13;&#10;" else="&#10;">
+		<or>
+			<os family="windows" />
+			<os family="dos" />
+		</or>
+	</condition>
+	
+	<macrodef name="set-parameter">
+		<attribute name="parameter" />
+		<attribute name="value" />
+		<sequential>
+			<antcontrib:if>
+				<isset property="@{parameter}" />
+				<then>
+					<echo message="@{parameter}=@{value}${cr-lf}" file="assets/app.cfg" append="true" />
+				</then>
+				<antcontrib:else>
+					<echo>not set parameter @{parameter}</echo>
+				</antcontrib:else>
+			</antcontrib:if>
+		</sequential>
+	</macrodef>
+
+	<property name="svn_log_file" value=".svn.log" />
+	<property name="buildout.dir" value="buildout" />
+
+    <target name="-svn-check">
+        <exec executable="svn" output="${svn_log_file}">
+          <arg value="diff" />
+        </exec>
+
+        <condition property="HAS_LOCAL_CHANGES" value="YES">
+            <resourcecontains resource="${svn_log_file}" substring="Index" />
+        </condition>
+
+        <fail>
+            You have changed the code. Please commit the changes before you build release.
+
+            <condition>
+                <and>
+                    <istrue value="${HAS_LOCAL_CHANGES}"/>
+                    <istrue value="${release}"/>
+                </and>
+            </condition>
+        </fail>
+    </target>
+
+    <target name="-svn-info">
+        <exec executable="svn" output="${svn_log_file}">
+          <arg value="info"/>
+          <arg value="--xml"/>
+        </exec>
+        <xpath input="${svn_log_file}" expression="/info/entry/commit/@revision" output="SVN_REVISION" />
+        <xpath input="${svn_log_file}" expression="/info/entry/url/text()" output="SVN_URL" />
+    </target>
+	
+	 <target name="-change-versionname" depends="-svn-info">
+		<echo>svnVersion=${SVN_REVISION}</echo>
+		<replaceregexp file="${manifest.file}" encoding="utf-8" match="(android:versionName=\x22\d*\.\d*\.\d*\.)\d*(\x22)" replace="\1${SVN_REVISION}\2" byline="true"/>
+    </target>
+
+    <target name="-change-versioncode" depends="-svn-info">
+		<echo>svnVersion=${SVN_REVISION}</echo>
+		<replaceregexp file="${manifest.file}" encoding="utf-8" match="(android:versionCode=\x22)\d*(\x22)" replace="\1${SVN_REVISION}\2" byline="true"/>
+    </target>
+
+    <target name="-pre-build" depends="-release-setparmeters, -excute jar">
+
+    </target>
+	
+	<target name="-release-setparmeters" if="has.keystore">
+				<taskdef uri="antlib:net.sf.antcontrib"
+              resource="net/sf/antcontrib/antlib.xml"
+              classpath="ant-contrib-1.0b3.jar"/>
+		<delete dir="gen" />
+		<delete dir="bin" />
+		<property name="HAS_LOCAL_CHANGES" value="NC" />
+		<delete file="assets/app.cfg" />
+		<touch file="assets/app.cfg" />
+		<tstamp>
+			<format property="APK_BUILD_TIME" pattern="yyyy/MM/dd HH:mm:ss" />
+		</tstamp> 
+		<set-parameter parameter="VRS_UUID" value="${VRS_UUID}" />
+		<set-parameter parameter="APK_VERSION" value="${APK_VERSION}" />
+		<set-parameter parameter="SVN_REVISION" value="${SVN_REVISION}" />
+		<set-parameter parameter="SVN_URL" value="${SVN_URL}" />
+		<set-parameter parameter="APK_ISHOME" value="${APK_ISHOME}" />
+		<set-parameter parameter="APK_ISPINGBACKOFFICIAL" value="${APK_ISPINGBACKOFFICIAL}" />
+		<set-parameter parameter="APK_SHOW_VOLUME" value="${APK_SHOW_VOLUME}" />
+		<set-parameter parameter="HAS_LOCAL_CHANGES" value="${HAS_LOCAL_CHANGES}" />
+		<set-parameter parameter="APK_PRODUCT" value="${APK_PRODUCT}" />
+		<set-parameter parameter="APK_SUPPORT_MULTISCREEN" value="${APK_SUPPORT_MULTISCREEN}" />
+		<set-parameter parameter="APK_SUPPORT_MICROWINDOW_PLAY" value="${APK_SUPPORT_MICROWINDOW_PLAY}" />
+		<set-parameter parameter="APK_MEDIAPLAYERTYPE" value="${APK_MEDIAPLAYERTYPE}" />
+		<set-parameter parameter="APK_DISABLE_SERVICE_BOOTUP" value="${APK_DISABLE_SERVICE_BOOTUP}" />
+		<set-parameter parameter="APK_SUPPORT_OFFLINE" value="${APK_SUPPORT_OFFLINE}" />
+		<set-parameter parameter="APK_PACKAGE_NAME" value="${APK_PACKAGE_NAME}" />
+		<set-parameter parameter="APK_SHOW_VIP" value="${APK_SHOW_VIP}" />
+		<set-parameter parameter="APK_SUPPORT_4K" value="${APK_SUPPORT_4K}" />
+		<set-parameter parameter="APK_SUPPORT_ANDROIDCACHE" value="${APK_SUPPORT_ANDROIDCACHE}" />
+		<set-parameter parameter="APK_GITV_UI" value="${APK_GITV_UI}" />
+		<set-parameter parameter="APK_PAD_UI" value="${APK_PAD_UI}" />
+		<set-parameter parameter="APK_BUILD_TIME" value="${APK_BUILD_TIME}" />
+		<set-parameter parameter="APK_UI_STYLE" value="${APK_UI_STYLE}" />
+		<set-parameter parameter="APK_SUPPORT_OTHER_DOAIN" value="${APK_SUPPORT_OTHER_DOAIN}" />
+		<set-parameter parameter="APK_PINGBACK_P2" value="${APK_PINGBACK_P2}" />
+		<set-parameter parameter="APP_STORE_PKG_NAME" value="${APP_STORE_PKG_NAME}" />
+		<set-parameter parameter="APK_SHOULD_AUTH_MAC" value="${APK_SHOULD_AUTH_MAC}" />
+	</target>
+	
+	<target name="-release-sign" if="has.keystore">
+        <!-- only create apk if *not* a library project -->
+        <do-only-if-not-library elseText="Library project: do not create apk..." >
+            <sequential>
+                <property name="out.unaligned.file" location="${out.absolute.dir}/${ant.project.name}-release-unaligned.apk" />
+
+                <!-- Signs the APK -->
+                <echo level="info">Signing final apk...</echo>
+                <signapk
+                        input="${out.packaged.file}"
+                        output="${out.unaligned.file}"
+                        keystore="${key.store}"
+                        storepass="${key.store.password}"
+                        alias="${key.alias}"
+                        keypass="${key.alias.password}"/>
+
+                <!-- Zip aligns the APK -->
+                <zipalign-helper
+                        in.package="${out.unaligned.file}"
+                        out.package="${out.final.file}" />
+                <echo level="info">Release Package: ${out.final.file}</echo>
+            </sequential>
+        </do-only-if-not-library>
+        <record-build-info />
+    </target>
+
+    <!-- Builds debug output package -->
+    <target name="debug"  depends="-set-debug-files, -do-debug, -release-nosign, -release-sign, -post-build" description="Builds the application and signs it with a debug key.">
+    </target>
+	
+	<target name="-post-build">
+		<xpath input="AndroidManifest.xml" expression="/manifest/@android:versionName" output="VERSION_NAME" />
+		<basename property="app_apk_name" file="${out.final.file}" suffix=".apk"/>
+
+		<mkdir dir="${buildout.dir}"/>
+		
+		<copy file="${out.final.file}" tofile="${buildout.dir}/${app_apk_name}-${VERSION_NAME}-r${SVN_REVISION}-${APK_MARKET}.apk"/>
+		<checksum file="${buildout.dir}/${app_apk_name}-${VERSION_NAME}-r${SVN_REVISION}-${APK_MARKET}.apk" algorithm="md5" format="MD5SUM" forceOverwrite="yes" />
+		<delete file="${svn_log_file}" />
+		<delete dir="gen" />
+		<delete dir="bin" />
+	</target>
+	
+	<target name="-obfuscate">
+        <if condition="${proguard.enabled}">
+            <then>
+                <property name="obfuscate.absolute.dir" location="${out.absolute.dir}/proguard" />
+                <property name="preobfuscate.jar.file" value="${obfuscate.absolute.dir}/original.jar" />
+				<property name="qiyi.src.obfuscated.jar.file" value="${obfuscate.absolute.dir}/qiyi-src-obfuscated.jar" />
+				<property name="qiyi.libs.jar.file" value="${obfuscate.absolute.dir}/qiyi-libs.jar" />
+				<property name="qiyi.libs.shrink.jar" value="${obfuscate.absolute.dir}/qiyi-libs-shrink.jar" />
+                <property name="obfuscated.jar.file" value="${obfuscate.absolute.dir}/obfuscated.jar" />
+                <!-- input for dex will be proguard's output -->
+                <property name="out.dex.input.absolute.dir" value="${obfuscated.jar.file}" />
+
+                <!-- Add Proguard Tasks -->
+                <property name="proguard.jar" location="${android.tools.dir}/proguard/lib/proguard.jar" />
+                <taskdef name="proguard" classname="proguard.ant.ProGuardTask" classpath="${proguard.jar}" />
+
+                <!-- Set the android classpath Path object into a single property. It'll be
+                     all the jar files separated by a platform path-separator.
+                     Each path must be quoted if it contains spaces.
+                -->
+                <pathconvert property="project.target.classpath.value" refid="project.target.class.path">
+                    <firstmatchmapper>
+                        <regexpmapper from='^([^ ]*)( .*)$$' to='"\1\2"'/>
+                        <identitymapper/>
+                    </firstmatchmapper>
+                </pathconvert>
+
+                <!-- Build a path object with all the jar files that must be obfuscated.
+                     This include the project compiled source code and any 3rd party jar
+                     files. -->
+                <path id="project.all.classes.path">
+                    <pathelement location="${preobfuscate.jar.file}" />
+                    <!-- <path refid="project.all.jars.path" /> -->
+                </path>
+                <!-- Set the project jar files Path object into a single property. It'll be
+                     all the jar files separated by a platform path-separator.
+                     Each path must be quoted if it contains spaces.
+                -->
+                <pathconvert property="project.all.classes.value" refid="project.all.classes.path">
+                    <firstmatchmapper>
+                        <regexpmapper from='^([^ ]*)( .*)$$' to='"\1\2"'/>
+                        <identitymapper/>
+                    </firstmatchmapper>
+                </pathconvert>
+				
+				<pathconvert property="project.all.third.jar.value" refid="project.all.jars.path">
+                    <firstmatchmapper>
+                        <regexpmapper from='^([^ ]*)( .*)$$' to='"\1\2"'/>
+                        <identitymapper/>
+                    </firstmatchmapper>
+                </pathconvert>
+
+                <!-- Turn the path property ${proguard.config} from an A:B:C property
+                     into a series of includes: -include A -include B -include C
+                     suitable for processing by the ProGuard task. Note - this does
+                     not include the leading '-include "' or the closing '"'; those
+                     are added under the <proguard> call below.
+                -->
+                <path id="proguard.configpath">
+                    <pathelement path="${proguard.config}"/>
+                </path>
+                <pathconvert pathsep='" -include "' property="proguard.configcmd" refid="proguard.configpath"/>
+
+                <mkdir   dir="${obfuscate.absolute.dir}" />
+				<mkdir   dir="${buildout.dir}" />
+				<mkdir   dir="${buildout.dir}/proguard" />
+                <delete file="${preobfuscate.jar.file}"/>
+                <delete file="${obfuscated.jar.file}"/>
+                <jar basedir="${out.classes.absolute.dir}"
+                    destfile="${preobfuscate.jar.file}" />
+                <proguard>
+                    -include      "${proguard.configcmd}"
+                    -include      "${out.absolute.dir}/proguard.txt"
+                    -injars       ${project.all.classes.value}
+                    -outjars      "${qiyi.src.obfuscated.jar.file}"
+					
+					-printconfiguration
+					-keepattributes SourceFile,LineNumberTable
+					-keepattributes Signature
+					
+                    -libraryjars  ${project.target.classpath.value}
+					-libraryjars  ${project.all.third.jar.value}
+                    -dump         "${buildout.dir}/proguard/dump-${APK_CUSTOMER}-${TV_VERSION_NAME}-r${SVN_REVISION}.txt"
+                    -printseeds   "${buildout.dir}/proguard/seeds-${APK_CUSTOMER}-${TV_VERSION_NAME}-r${SVN_REVISION}.txt"
+                    -printusage   "${buildout.dir}/proguard/usage-${APK_CUSTOMER}-${TV_VERSION_NAME}-r${SVN_REVISION}.txt"
+                    -printmapping "${buildout.dir}/proguard/mapping-${APK_CUSTOMER}-${TV_VERSION_NAME}-r${SVN_REVISION}.txt"
+                </proguard>
+				
+				<!-- <antcall target="merge-libs-jar" /> -->
+				<property name="libs.dir" location="libs" />
+				<jar destfile="${obfuscated.jar.file}">
+					<restrict>
+					<name name="**/*.class"/>
+					<archives>
+						<zips>
+							<fileset dir="${libs.dir}" includes="**/*.jar"/>
+						</zips>
+					</archives>
+					</restrict>
+					<zipfileset excludes="META-INF/*.SF" src="${qiyi.src.obfuscated.jar.file}" />
+				</jar>
+				<delete file="${qiyi.src.obfuscated.jar.file}"/>
+				<!-- <proguard>
+                    -injars       "${qiyi.libs.jar.file}"
+                    -outjars      "${qiyi.libs.shrink.jar}"
+					
+                    -dontobfuscate
+                </proguard>
+				
+				<antcall target="merge-all-jar" /> -->
+            </then>
+        </if>
+    </target>
+
+    <target name="start">
+        <exec executable="adb">
+          <arg value="shell"/>
+          <arg value="am"/>
+          <arg value="start"/>
+          <arg value="com.qiyi.video/.ui.WelcomeActivity"/>
+        </exec>
+    </target>
+
+    <target name="stop">
+        <exec executable="adb">
+          <arg value="shell"/>
+          <arg value="am"/>
+          <arg value="stop"/>
+          <arg value="com.qiyi.video"/>
+        </exec>
+    </target>
+	
+	<target name="-excute jar">        
+        <java classname="com.aixin.encode.MD5" classpathref="lib_classpath">
+           <arg value = "APK_UUID=${APK_UUID}"/>
+		   <arg value = "APK_BUILD_TIME=${APK_BUILD_TIME}"/>
+        </java>
+    </target>
+    
+	<path id="lib_classpath">
+        <fileset dir="${basedir}/">
+            <include name="encode.jar"/>
+        </fileset>
+    </path>
+
+</project>
