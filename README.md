@@ -129,6 +129,6 @@ android:canRetrieveWindowContent="true"
 
 版权及免责声明
 
-本项目使用 GNU Lesser General Public License协议，误用于商业性质。
+本项目使用 GNU Lesser General Public License协议，禁止用于商业性质。
 
 
