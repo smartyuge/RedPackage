@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/RedPackage.iml" filepath="$PROJECT_DIR$/RedPackage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RedPackage/RedPackage-RedPackage.iml" filepath="$PROJECT_DIR$/RedPackage/RedPackage-RedPackage.iml" />
-    </modules>
-  </component>
-</project>
