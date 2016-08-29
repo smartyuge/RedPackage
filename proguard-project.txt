@@ -62,11 +62,3 @@
 }
 
 -keepattributes *Annotation*
--keep public class com.google.vending.licensing.ILicensingService
--keep public class com.android.vending.licensing.ILicensingService
-
-#以下代码会在javascript代码中使用，所以不能混淆
--keep class com.aixin.assistant.account.ThirdLoginActivity$HandleData {
-	*;
-}
-
