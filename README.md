@@ -127,7 +127,7 @@ android:canRetrieveWindowContent="true"
         return content;
     }
 ``` 
-##欢迎关注我的个人公众号，android干货，源码解析
+####欢迎关注我的个人公众号，android 技术干货，问题深度总结，FrameWork源码解析，插件化研究，最新开源项目推荐
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/qrcode.jpg)
 
 版权及免责声明
