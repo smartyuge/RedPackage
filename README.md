@@ -1,8 +1,11 @@
 # RedPackage
 红包精灵，如果喜欢，点个star,开源不易。
 
-##效果图：
-![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/iamge5.png)
+##优亿市场：
+[http://www.eoemarket.com/soft/778143.html](http://www.eoemarket.com/soft/778143.html)
+
+
+##应用市场效果图：
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image6.png)
 
 ##关键Service代码：
