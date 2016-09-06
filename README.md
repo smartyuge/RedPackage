@@ -14,6 +14,7 @@
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image3.png)
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image4.png)
 
+注：此前在15年12月时，用的Eclipse开发这个，后来没有时间切到AS上去，如运行在AS可以的话，可提pr
 ##实现原理
 
 1.1 状态说明
