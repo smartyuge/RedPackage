@@ -101,7 +101,7 @@
         android:layout_below="@id/start_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dimen_30dp"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/icon"
         android:visibility="gone" />
 
     <LinearLayout
