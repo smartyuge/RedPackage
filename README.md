@@ -1,21 +1,21 @@
 # RedPackage
 红包精灵，如果喜欢，点个star,开源不易。
 
-##优亿市场：
+## 优亿市场：
 [http://www.eoemarket.com/soft/778143.html](http://www.eoemarket.com/soft/778143.html)
 
 
-##应用市场效果图：
+## 应用市场效果图：
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image6.png)
 
-##关键Service代码：
+## 关键Service代码：
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image1.png)
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image2.png)
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image3.png)
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/image4.png)
 
 注：此前在15年12月时，用的Eclipse开发这个，后来没有时间切到AS上去，如运行在AS可以的话，可提pr
-##实现原理
+## 实现原理
 
 1.1 状态说明
 ``` 
@@ -128,7 +128,7 @@ android:canRetrieveWindowContent="true"
         return content;
     }
 ``` 
-####欢迎关注我的个人公众号，android 技术干货，问题深度总结，FrameWork源码解析，插件化研究，最新开源项目推荐
+#### 欢迎关注我的个人公众号，android 技术干货，问题深度总结，FrameWork源码解析，插件化研究，最新开源项目推荐
 ![这里写图片描述](https://github.com/hejunlin2013/RedPackage/blob/master/image/qrcode.jpg)
 
 版权及免责声明
